@@ -81,7 +81,7 @@ const TopPlay = () => {
           </Link>
         </div>
         <div className="mt-4 flex flex-col gap-1">
-          {topPlays?.map((song, i) => (
+          {topPlays?.filter((song) => song?.hub?.actions).map((song, i) => (
             <TopChartCard
               key={song.key}
               song={song}
