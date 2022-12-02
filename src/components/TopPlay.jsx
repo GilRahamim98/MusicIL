@@ -52,8 +52,8 @@ const TopPlay = () => {
   const divRef = useRef(null);
 
   useEffect(() => {
-    divRef.current?.firstElementChild?.scrollIntoView();
-  });
+    divRef.current.scrollIntoView();
+  }, [data]);
 
   const topPlays = data?.slice(0, 5);
 
