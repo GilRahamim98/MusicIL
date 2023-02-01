@@ -10,7 +10,6 @@ const App = () => {
   const divRef = useRef(null);
 
   useEffect(() => {
-    console.log(divRef.current?.firstElementChild);
     divRef.current?.firstElementChild?.scrollIntoView();
   }, []);
 
