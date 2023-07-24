@@ -22,14 +22,14 @@ const TopChartCard = ({ song, i, isPlaying, activeSong, handlePause, handlePlay 
     >
       <img
         className="w-20 h-20 rounded-lg"
-        src={song?.images?.coverart}
-        alt={song?.title}
+        src={song?.track?.album?.images[0]?.url}
+        alt={song?.track?.name}
       />
       <div className="flex-1 flex flex-col justify-center mx-3">
         <Link to={`/songs/${song.key}`}>
-          <p className="text-xl font-bold text-white">{song?.title}</p>
+          <p className="text-xl font-bold text-white">{song?.track?.name}</p>
         </Link>
-        <Link to={`/artists/${song?.artists[0].adamid}`}>
+        <Link to={`/artists/${song?.track?.artists[0]}`}>
           <p className="text-base text-gray-300 mt-1">{song?.subtitle}</p>
         </Link>
       </div>
@@ -55,7 +55,7 @@ const TopPlay = () => {
     divRef.current.scrollIntoView();
   }, [data]);
 
-  const topPlays = data?.slice(0, 5);
+  const topPlays = data?.items?.slice(0, 5);
 
   const handlePauseClick = () => {
     dispatch(playPause(false));
@@ -81,9 +81,9 @@ const TopPlay = () => {
           </Link>
         </div>
         <div className="mt-4 flex flex-col gap-1">
-          {topPlays?.filter((song) => song?.hub?.actions).map((song, i) => (
+          {topPlays?.filter((song) => song?.track).map((song, i) => (
             <TopChartCard
-              key={song.key}
+              key={song?.track?.id}
               song={song}
               i={i}
               isPlaying={isPlaying}
@@ -120,7 +120,7 @@ const TopPlay = () => {
                     className="shadow-lg rounded-full animate-slideright"
                   >
 
-                    <Link to={song?.artists[0].adamid ? `/artists/${song?.artists[0].adamid}` : null}>
+                    <Link to={song?.track?.artists[0] ? `/artists/${song?.track?.artists[0]}` : null}>
                       <img
                         src={song?.images.background}
                         alt="name"

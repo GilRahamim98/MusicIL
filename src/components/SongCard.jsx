@@ -4,6 +4,7 @@ import PlayPause from './PlayPause';
 import { playPause, setActiveSong } from '../redux/features/playerSlice';
 
 const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
+  console.log(song.data);
   const dispatch = useDispatch();
   const handlePauseClick = () => {
     dispatch(playPause(false));
@@ -32,17 +33,17 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
             handlePlay={handlePlayClick}
           />
         </div>
-        <img alt="song_img" src={song.images?.coverart} />
+        <img alt="song_img" src={song.data.albumOfTrack?.coverArt?.sources[0]?.url} />
       </div>
       <div className="mt-4 flex flex-col">
         <p className="font-semibold text-lg text-white truncate">
-          <Link to={`/songs/${song?.key}`}>
-            {song.title}
+          <Link to={`/songs/${song?.data?.id}`}>
+            {song.data.name}
           </Link>
         </p>
         <p className="text-sm truncate text-gray-300 mt-1">
-          <Link to={song.artists ? `/artists/${song?.artists[0]?.adamid}` : '/top-artists'}>
-            {song.subtitle}
+          <Link to={song.data.artists ? `/artists/${song?.data?.artists?.items[0]?.profile?.name}` : '/top-artists'}>
+            {song?.data?.artists.items[0]?.profile?.name}
           </Link>
         </p>
 

@@ -11,7 +11,7 @@ export const spotifyApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getTopCharts: builder.query({ query: () => '/playlist/?id=37i9dQZEVXbMDoHDwVN2tF' }),
+    getTopCharts: builder.query({ query: () => '/playlist_tracks/?id=37i9dQZEVXbMDoHDwVN2tF' }),
     getSongsByGenre: builder.query({ query: (genre) => `/search/?q=${genre}&type=multi&offset=0&limit=10&numberOfTopResults=5` }),
     getSongDetails: builder.query({ query: ({ songid }) => `/tracks/?ids=${songid}` }),
     getSongRelated: builder.query({ query: () => '/playlist/?id=37i9dQZEVXbMDoHDwVN2tF' }), //change
