@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 import { Error, Loader, SongCard } from '../components';
-import { useGetSongByContryQuery } from '../redux/services/shazamCore';
+import { useGetSongByContryQuery } from '../redux/services/spotify';
 
 const AroundYou = () => {
     const [country, setCountry] = useState('');

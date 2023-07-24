@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
 
 import { setActiveSong, playPause } from '../redux/features/playerSlice';
-import { useGetSongDetailsQuery, useGetSongRelatedQuery } from '../redux/services/shazamCore';
+import { useGetSongDetailsQuery, useGetSongRelatedQuery } from '../redux/services/spotify';
 
 const SongDetails = () => {
     const dispatch = useDispatch();

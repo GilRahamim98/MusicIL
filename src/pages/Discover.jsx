@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Error, Loader, SongCard } from '../components';
 import { genres } from '../assets/constants';
-import { useGetSongsByGenreQuery } from '../redux/services/shazamCore';
+import { useGetSongsByGenreQuery } from '../redux/services/spotify';
 import { selectGenreListId } from '../redux/features/playerSlice';
 
 const Discover = () => {
