@@ -14,10 +14,13 @@ export const spotifyApi = createApi({
     getTopCharts: builder.query({ query: () => '/playlist_tracks/?id=37i9dQZEVXbMDoHDwVN2tF' }),
     getSongsByGenre: builder.query({ query: (genre) => `/search/?q=${genre}&type=multi&offset=0&limit=10&numberOfTopResults=5` }),
     getSongDetails: builder.query({ query: ({ songid }) => `/tracks/?ids=${songid}` }),
-    getSongRelated: builder.query({ query: () => '/playlist/?id=37i9dQZEVXbMDoHDwVN2tF' }), //change
+    getSongRelated: builder.query({ query: () => '/playlist_tracks/?id=37i9dQZEVXbMDoHDwVN2tF' }), //change
     getArtistDetails: builder.query({ query: (artistId) => `/artist_overview/?id=${artistId}` }),
-    getSongByContry: builder.query({ query: () => '/playlist/?id=37i9dQZEVXbMDoHDwVN2tF' }), //change
+    getSongByCountry: builder.query({ query: (countryName) => `/search/?q=${countryName}&type=playlist&offset=0&limit=10&numberOfTopResults=5` }),
+    getSongsFromPlaylist: builder.query({ query: (playlistId) => `/playlist_tracks/?id=${playlistId}` }),
     getSongsBySearch: builder.query({ query: (searchTerm) => `/search/?q=${searchTerm}&type=multi&offset=0&limit=10&numberOfTopResults=5` }),
+    getSongLyrics: builder.query({ query: ({ songid }) => `/track_lyrics/?id=${songid}` }),
+
   }),
 });
 export const {
@@ -26,6 +29,8 @@ export const {
   useGetSongDetailsQuery,
   useGetSongRelatedQuery,
   useGetArtistDetailsQuery,
-  useGetSongByContryQuery,
+  useGetSongByCountryQuery,
+  useGetSongsFromPlaylistQuery,
   useGetSongsBySearchQuery,
+  useGetSongLyricsQuery
 } = spotifyApi;
