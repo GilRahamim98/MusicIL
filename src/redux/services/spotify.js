@@ -17,7 +17,7 @@ export const spotifyApi = createApi({
     getSongRelated: builder.query({ query: () => '/playlist_tracks/?id=37i9dQZEVXbMDoHDwVN2tF' }), //change
     getArtistDetails: builder.query({ query: (artistId) => `/artist_overview/?id=${artistId}` }),
     getSongByCountry: builder.query({ query: (countryName) => `/search/?q=${countryName}&type=playlist&offset=0&limit=10&numberOfTopResults=5` }),
-    getSongsFromPlaylist: builder.query({ query: (playlistId) => `/playlist_tracks/?id=${playlistId}` }),
+    getSongsFromPlaylist: builder.query({ query: ({playlistId}) => `/playlist_tracks/?id=${playlistId}` }),
     getSongsBySearch: builder.query({ query: (searchTerm) => `/search/?q=${searchTerm}&type=multi&offset=0&limit=10&numberOfTopResults=5` }),
     getSongLyrics: builder.query({ query: ({ songid }) => `/track_lyrics/?id=${songid}` }),
 

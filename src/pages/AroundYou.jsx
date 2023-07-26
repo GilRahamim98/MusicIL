@@ -7,11 +7,11 @@ import { useGetSongByCountryQuery, useGetSongsFromPlaylistQuery } from '../redux
 
 const AroundYou = () => {
   const [country, setCountry] = useState('');
-  const [playlistId, setPlaylistId] = useState('');
   const [loading, setLoading] = useState(true);
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetSongByCountryQuery(country);
-  const { data: songsData, isFetching: isFetchingSongsData } = useGetSongsFromPlaylistQuery(playlistId);
+  const [playlistId, setPlaylistId] = useState('0');
+  const { data: songsData, isFetching: isFetchingSongsData } = useGetSongsFromPlaylistQuery({playlistId});
 
   const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
 
@@ -19,15 +19,15 @@ const AroundYou = () => {
   useEffect(() => {
     axios.get('https://geo.ipify.org/api/v2/country?apiKey=at_w1PlSHEnlrfedbHXksB7GxG85bScW')
       .then((res) => setCountry(`top 50 ${regionNames.of(res?.data?.location?.country)}`))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
+      .catch((err) => console.log(err));
   }, [country]);
 
   useEffect(() => {
     setPlaylistId(data?.playlists?.items[0]?.data?.uri?.slice(17));
-  }, [data]);
+    setLoading(false);
+  }, [data,country]);
 
-  if (isFetching && loading && isFetchingSongsData) return <Loader title="Loading songs around you" />;
+  if (isFetching || loading || isFetchingSongsData) return <Loader title="Loading songs around you" />;
   if (error && country) return <Error />;
 
   return (
@@ -40,7 +40,7 @@ const AroundYou = () => {
       <div className="flex flex-wrap sm:justify-start
             justify-center gap-8"
       >
-        {playlistId&& songsData?.tracks?.items?.filter((song) => song?.data).map((song, i) => (
+        {songsData?.tracks?.items?.filter((song) => song?.data).map((song, i) => (
           <SongCard
             key={song?.data?.id}
             song={song}
